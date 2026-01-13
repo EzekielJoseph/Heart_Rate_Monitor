@@ -78,6 +78,9 @@ void setup() {
   server.begin();
 
   // Initialize sensor
+  Wire.begin();
+  Wire.setClock(400000); // I2C 400kHz
+  
   if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) {
     Serial.println("MAX30102 was not found. Please check wiring/power. ");
     while (1)
@@ -144,5 +147,5 @@ void loop() {
     Serial.print(" No finger?");
 
   Serial.println();
-
+  delay(10); 
 }
