@@ -31,15 +31,16 @@ void setup() {
   // API BPM
   server.on("/bpm", HTTP_GET, [] (AsyncWebServerRequest *request) {
     DynamicJsonDocument doc(128);
-    doc["ir"] = particleSensor.getIR();
-    doc["bpm"] = beatsPerMinute;
-    doc["avg_bpm"] = beatAvg;
+    doc[""] = beatAvg;
 
     String response;
     serializeJson(doc, response);
-    request->send(200, "application/json", response);
+    request->send(200, "application/json", String(beatAvg));
   });
 
+  // Begin Server
+  server.begin();
+  Serial.println("HTTP server started");
 
   // Initialize sensor
   Wire.begin();
